@@ -22,7 +22,7 @@ const FilterComponent: React.FC<any> = (props: SelectProps) => {
 		handleChange,
 		options,
 		width = '197.12px',
-		height = '40px',
+		height = '60px',
 		variant = 'outlined',
 		disableUnderline = false,
 		placeholder,

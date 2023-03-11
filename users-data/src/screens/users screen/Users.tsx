@@ -12,6 +12,8 @@ const UsersComponent: React.FC<any> = () => {
 	const [nationality, setNationality] = useState<any>('');
 	const [nat, setNat] = useState<any>([]);
 	const [rows, setRows] = useState<any>([]);
+	const [page, setPage] = useState(0);
+	const [rowsPerPage, setRowsPerPage] = useState(8);
 
 	const genderOptions = ['female', 'male'];
 
@@ -22,7 +24,15 @@ const UsersComponent: React.FC<any> = () => {
 	const handleChangeNationality = (event: any, value: any) => {
 		setNationality(value);
 	};
-	console.log(nationality, 'd', nat);
+
+	const handleChangePage = (event: any, newPage: number) => {
+		setPage(newPage);
+	};
+
+	const handleChangeRowsPerPage = (event: any) => {
+		setRowsPerPage(parseInt(event.target.value, 8));
+		setPage(0);
+	};
 
 	useEffect(() => {
 		if (gender) {
@@ -41,6 +51,13 @@ const UsersComponent: React.FC<any> = () => {
 					setRows(data.results);
 				})
 				.catch((err: any) => console.log(err));
+		} else if (page) {
+			axios
+				.get(`https://randomuser.me/api?results=8&page=${page}`)
+				.then(({ data }) => {
+					setRows(data.results);
+				})
+				.catch((err: any) => console.log(err));
 		} else {
 			axios
 				.get(`https://randomuser.me/api?results=8`)
@@ -52,7 +69,7 @@ const UsersComponent: React.FC<any> = () => {
 		rows.map((data: any) => {
 			nat.push(data.nat.toLowerCase());
 		});
-	}, [gender, nationality]);
+	}, [gender, nationality, page]);
 
 	return (
 		<div className={classes.page}>
@@ -89,7 +106,13 @@ const UsersComponent: React.FC<any> = () => {
 					</div>
 				</div>
 
-				<UsersTable rows={rows} />
+				<UsersTable
+					rows={rows}
+					page={page}
+					rowsPerPage={rowsPerPage}
+					handleChangePage={handleChangePage}
+					handleChangeRowsPerPage={handleChangeRowsPerPage}
+				/>
 			</Paper>
 		</div>
 	);

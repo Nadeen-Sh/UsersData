@@ -6,15 +6,17 @@ import {
 	TableContainer,
 	TableHead,
 	TableRow,
-	Paper,
+	TablePagination,
 	Typography,
+	Paper,
 } from '@mui/material';
 import axios from 'axios';
 import UsersStyle from './Users.style';
 
 const UsersTable: React.FC<any> = (props: any) => {
 	const classes = UsersStyle();
-	const { rows } = props;
+	const { rows, rowsPerPage, handleChangePage, handleChangeRowsPerPage, page } =
+		props;
 
 	return (
 		<>
@@ -86,6 +88,15 @@ const UsersTable: React.FC<any> = (props: any) => {
 					</TableBody>
 				</Table>
 			</TableContainer>
+			<TablePagination
+				rowsPerPageOptions={[8, 16]}
+				component='div'
+				count={16}
+				rowsPerPage={rowsPerPage}
+				page={page}
+				onPageChange={handleChangePage}
+				onRowsPerPageChange={handleChangeRowsPerPage}
+			/>
 		</>
 	);
 };
