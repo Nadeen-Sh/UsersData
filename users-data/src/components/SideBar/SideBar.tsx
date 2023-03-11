@@ -1,7 +1,6 @@
 import React from 'react';
 import {
 	Drawer,
-	Toolbar,
 	List,
 	ListItem,
 	ListItemButton,
@@ -16,9 +15,9 @@ import logo from '../../assets/logo-white-small 1.png';
 import sideBarStyle from './SideBar.style';
 
 const drawerWidth = 255;
-const classes = sideBarStyle();
 
 const SideBarComponent: React.FC<any> = () => {
+	const classes = sideBarStyle();
 	return (
 		<div>
 			<Drawer
@@ -34,7 +33,6 @@ const SideBarComponent: React.FC<any> = () => {
 				}}
 				variant='permanent'
 				anchor='left'>
-				<Toolbar />
 				<div className={classes.iconContainer}>
 					<img src={logo} alt='logo' className={classes.icon} />
 				</div>

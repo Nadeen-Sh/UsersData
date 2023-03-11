@@ -4,7 +4,8 @@ export default makeStyles(() => ({
 	iconContainer: {
 		display: 'flex',
 		justifyContent: 'center',
-		marginBottom: '50px',
+		marginBottom: '30px',
+		marginTop: '30px',
 	},
 	icon: {
 		height: '32px',
