@@ -10,7 +10,8 @@ const UsersComponent: React.FC<any> = () => {
 	const classes = UsersStyle();
 	const [gender, setGender] = useState<any>('');
 	const [nationality, setNationality] = useState<any>('');
-	const [country, setCountries] = useState<any>([]);
+	const [nat, setNat] = useState<any>([]);
+	const [rows, setRows] = useState<any>([]);
 
 	const genderOptions = ['female', 'male'];
 
@@ -21,6 +22,37 @@ const UsersComponent: React.FC<any> = () => {
 	const handleChangeNationality = (event: any, value: any) => {
 		setNationality(value);
 	};
+	console.log(nationality, 'd', nat);
+
+	useEffect(() => {
+		if (gender) {
+			axios
+				.get(`https://randomuser.me/api/?gender=${gender}`)
+				.then(({ data }) => {
+					setRows(data.results);
+					console.log(data);
+				})
+				.catch((err: any) => console.log(err));
+		} else if (nationality) {
+			setNationality(nationality.toLowerCase());
+			axios
+				.get(`https://randomuser.me/api/?results=8&nat=${nationality}`)
+				.then(({ data }) => {
+					setRows(data.results);
+				})
+				.catch((err: any) => console.log(err));
+		} else {
+			axios
+				.get(`https://randomuser.me/api?results=8`)
+				.then(({ data }) => {
+					setRows(data.results);
+				})
+				.catch((err: any) => console.log(err));
+		}
+		rows.map((data: any) => {
+			nat.push(data.nat.toLowerCase());
+		});
+	}, [gender, nationality]);
 
 	return (
 		<div className={classes.page}>
@@ -52,12 +84,12 @@ const UsersComponent: React.FC<any> = () => {
 							handleChange={(event: any, value: any) =>
 								handleChangeNationality(event, value)
 							}
-							options={country}
+							options={nat}
 						/>
 					</div>
 				</div>
 
-				<UsersTable gender={gender} />
+				<UsersTable rows={rows} />
 			</Paper>
 		</div>
 	);

@@ -13,29 +13,8 @@ import axios from 'axios';
 import UsersStyle from './Users.style';
 
 const UsersTable: React.FC<any> = (props: any) => {
-	const [rows, setRows] = useState<any>([]);
 	const classes = UsersStyle();
-	const { gender } = props;
-
-	useEffect(() => {
-		if (!gender) {
-			axios
-				.get(`https://randomuser.me/api?results=8`)
-				.then(({ data }) => {
-					setRows(data.results);
-					console.log(data);
-				})
-				.catch((err: any) => console.log(err));
-		} else {
-			axios
-				.get(`https://randomuser.me/api/?gender=${gender}`)
-				.then(({ data }) => {
-					setRows(data.results);
-					console.log(data);
-				})
-				.catch((err: any) => console.log(err));
-		}
-	}, [gender]);
+	const { rows } = props;
 
 	return (
 		<>
