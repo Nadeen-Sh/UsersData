@@ -10,11 +10,21 @@ import {
 	Typography,
 } from '@mui/material';
 import UsersStyle from './Users.style';
+import UserDetails from '../user details screen/UserDetails';
 
 const UsersTable: React.FC<any> = (props: any) => {
 	const classes = UsersStyle();
 	const { rows, rowsPerPage, handleChangePage, handleChangeRowsPerPage, page } =
 		props;
+	const [open, setOpen] = React.useState(false);
+
+	const handleClickOpen = (data: any) => {
+		setOpen(data);
+	};
+
+	const handleClose = () => {
+		setOpen(false);
+	};
 
 	return (
 		<>
@@ -41,7 +51,10 @@ const UsersTable: React.FC<any> = (props: any) => {
 							<TableRow
 								key={index}
 								sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-								<TableCell component='th' scope='row'>
+								<TableCell
+									component='th'
+									scope='row'
+									onClick={() => handleClickOpen(row)}>
 									<div className={classes.firstCell}>
 										<img className={classes.userImg} src={row.picture.large} />
 										<div className={classes.userFullName}>
@@ -90,6 +103,10 @@ const UsersTable: React.FC<any> = (props: any) => {
 				onPageChange={handleChangePage}
 				onRowsPerPageChange={handleChangeRowsPerPage}
 			/>
+
+			{open && (
+				<UserDetails open={handleClickOpen} onClose={handleClose} data={rows} />
+			)}
 		</>
 	);
 };
