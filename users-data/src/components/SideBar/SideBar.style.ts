@@ -1,6 +1,6 @@
 import { makeStyles } from '@mui/styles';
 
-export default makeStyles(() => ({
+export default makeStyles((appTheme: any) => ({
 	iconContainer: {
 		display: 'flex',
 		justifyContent: 'center',
@@ -10,5 +10,8 @@ export default makeStyles(() => ({
 	icon: {
 		height: '32px',
 		width: '131px',
+	},
+	listOption: {
+		color: appTheme.palette.secondary.dark,
 	},
 }));

@@ -5,6 +5,7 @@ import userLogo from '../../assets/user.png';
 import UsersTable from './UsersTable';
 import FilterComponent from '../../components/filters/Filter';
 import axios from 'axios';
+import clsx from 'clsx';
 
 const UsersComponent: React.FC<any> = () => {
 	const classes = UsersStyle();
@@ -74,9 +75,13 @@ const UsersComponent: React.FC<any> = () => {
 	return (
 		<div className={classes.page}>
 			<div className={classes.header}>
-				<Typography className={classes.title}>Users</Typography>
+				<Typography className={clsx(classes.title, classes.text)}>
+					Users
+				</Typography>
 				<div className={classes.userContainer}>
-					<Typography className={classes.userName}>Jones Ferdinand</Typography>
+					<Typography className={clsx(classes.userName, classes.title)}>
+						Jones Ferdinand
+					</Typography>
 					<div className={classes.imgContainer}>
 						<img src={userLogo} alt='user' className={classes.userImg} />
 					</div>

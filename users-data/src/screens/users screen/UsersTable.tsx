@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
 	Table,
 	TableBody,
@@ -8,9 +8,7 @@ import {
 	TableRow,
 	TablePagination,
 	Typography,
-	Paper,
 } from '@mui/material';
-import axios from 'axios';
 import UsersStyle from './Users.style';
 
 const UsersTable: React.FC<any> = (props: any) => {
@@ -44,14 +42,9 @@ const UsersTable: React.FC<any> = (props: any) => {
 								key={index}
 								sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
 								<TableCell component='th' scope='row'>
-									<div style={{ display: 'flex', flexDirection: 'row' }}>
+									<div className={classes.firstCell}>
 										<img className={classes.userImg} src={row.picture.large} />
-										<div
-											style={{
-												display: 'flex',
-												flexDirection: 'column',
-												paddingLeft: '30px',
-											}}>
+										<div className={classes.userFullName}>
 											<Typography className={classes.pText}>
 												{row.name.first} {row.name.last}
 											</Typography>

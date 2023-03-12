@@ -13,22 +13,25 @@ import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 import Person2Icon from '@mui/icons-material/Person2';
 import logo from '../../assets/logo-white-small 1.png';
 import sideBarStyle from './SideBar.style';
+import { useTheme } from '@mui/material/styles';
 
 const drawerWidth = 255;
 
 const SideBarComponent: React.FC<any> = () => {
 	const classes = sideBarStyle();
+	const theme = useTheme();
+
 	return (
 		<div>
 			<Drawer
 				sx={{
 					width: drawerWidth,
-					backgroundColor: '#363740',
+					backgroundColor: theme.palette.primary.main,
 					flexShrink: 0,
 					'& .MuiDrawer-paper': {
 						width: drawerWidth,
 						boxSizing: 'border-box',
-						backgroundColor: '#363740',
+						backgroundColor: theme.palette.primary.main,
 					},
 				}}
 				variant='permanent'
@@ -39,8 +42,8 @@ const SideBarComponent: React.FC<any> = () => {
 				<List>
 					{['Overview', 'Tickets', 'Ideas', 'Users'].map((text, index) => (
 						<ListItem key={text} disablePadding>
-							<ListItemButton style={{ color: '#A4A6B3' }}>
-								<ListItemIcon style={{ color: '#A4A6B3' }}>
+							<ListItemButton className={classes.listOption}>
+								<ListItemIcon className={classes.listOption}>
 									{index === 0 ? (
 										<PieChartIcon />
 									) : index === 1 ? (
