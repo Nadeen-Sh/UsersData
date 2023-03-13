@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Dialog, Typography } from '@mui/material';
 import UserDetailsStyle from './UserDetails.style';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
 
 const UserDetails: React.FC<any> = (props) => {
 	const { onClose, data } = props;
 	const classes = UserDetailsStyle();
-	console.log('data', data);
 
 	return (
 		<div>
@@ -20,15 +21,15 @@ const UserDetails: React.FC<any> = (props) => {
 				<div className={classes.imageContainer}>
 					<img
 						className={classes.userImage}
-						src={data[0].picture.large}
+						src={data.picture.large}
 						alt='user'
 					/>
 				</div>
 				<div className={classes.details}>
 					<Typography className={classes.name}>
-						{data[0].name.first} {data[0].name.last}
+						{data.name.first} {data.name.last}
 					</Typography>
-					<Typography className={classes.name}>{data[0].email} </Typography>
+					<Typography className={classes.name}>{data.email} </Typography>
 				</div>
 			</Dialog>
 		</div>

@@ -11,15 +11,18 @@ import {
 } from '@mui/material';
 import UsersStyle from './Users.style';
 import UserDetails from '../user details screen/UserDetails';
+import { useNavigate } from 'react-router-dom';
 
 const UsersTable: React.FC<any> = (props: any) => {
 	const classes = UsersStyle();
 	const { rows, rowsPerPage, handleChangePage, handleChangeRowsPerPage, page } =
 		props;
 	const [open, setOpen] = React.useState(false);
+	const navigate = useNavigate();
 
-	const handleClickOpen = (data: any) => {
+	const handleClickOpen = (data: any, id: any) => {
 		setOpen(data);
+		navigate(`/users/${id}`);
 	};
 
 	const handleClose = () => {
@@ -54,7 +57,7 @@ const UsersTable: React.FC<any> = (props: any) => {
 								<TableCell
 									component='th'
 									scope='row'
-									onClick={() => handleClickOpen(row)}>
+									onClick={() => handleClickOpen(row, row.id.name)}>
 									<div className={classes.firstCell}>
 										<img className={classes.userImg} src={row.picture.large} />
 										<div className={classes.userFullName}>
@@ -105,7 +108,7 @@ const UsersTable: React.FC<any> = (props: any) => {
 			/>
 
 			{open && (
-				<UserDetails open={handleClickOpen} onClose={handleClose} data={rows} />
+				<UserDetails open={handleClickOpen} onClose={handleClose} data={open} />
 			)}
 		</>
 	);

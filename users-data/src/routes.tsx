@@ -7,7 +7,7 @@ const Routers = (props: any) => {
 		<Routes>
 			<Route path='/' element={<Users />} />
 			<Route path='/users' element={<Users />} />
-			<Route path='/users/:userId' element={<UserDetails />} />
+			<Route path='/users/:userId' element={<Users />} />
 		</Routes>
 	);
 };
