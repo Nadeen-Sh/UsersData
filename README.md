@@ -1,4 +1,3 @@
-# MyMovies-React-Native
 
 ## Users Data
 In the user Data task, a table with users' data is displayed, with popups for each user opening.
