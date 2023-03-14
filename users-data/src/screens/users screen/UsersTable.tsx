@@ -34,6 +34,7 @@ const UsersTable: React.FC<any> = (props: any) => {
 
 	const handleClose = () => {
 		setOpen(false);
+		navigate(`/users/`);
 	};
 
 	useEffect(() => {
