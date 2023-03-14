@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import clsx from 'clsx';
 import {
 	Table,
 	TableBody,
@@ -12,12 +13,17 @@ import {
 import UsersStyle from './Users.style';
 import UserDetails from '../user details screen/UserDetails';
 import { useNavigate } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+const browserHistory = createBrowserHistory();
 
 const UsersTable: React.FC<any> = (props: any) => {
+	const ur = browserHistory.location.pathname.split('s/');
+
 	const classes = UsersStyle();
 	const { rows, rowsPerPage, handleChangePage, handleChangeRowsPerPage, page } =
 		props;
-	const [open, setOpen] = React.useState(false);
+	const [open, setOpen] = useState(false);
+	const [newData, setNewData] = useState<any>([]);
 	const navigate = useNavigate();
 
 	const handleClickOpen = (data: any, id: any) => {
@@ -29,22 +35,46 @@ const UsersTable: React.FC<any> = (props: any) => {
 		setOpen(false);
 	};
 
+	useEffect(() => {
+		const filteredData = rows.filter((row: any) => {
+			return row.id.name == ur[1];
+		});
+		let finalObj = {};
+
+		for (let i = 0; i < filteredData.length; i++) {
+			Object.assign(finalObj, filteredData[i]);
+		}
+		setNewData(finalObj);
+
+		if (browserHistory.location.pathname.length > 7) {
+			handleClickOpen(newData, ur[1]);
+		}
+	}, [browserHistory, rows]);
+
 	return (
 		<>
 			<TableContainer>
 				<Table sx={{ float: 'left' }} aria-label='simple table'>
 					<TableHead>
 						<TableRow>
-							<TableCell align='left' className={classes.headTable}>
+							<TableCell
+								align='left'
+								className={clsx(classes.text, classes.headTable)}>
 								User
 							</TableCell>
-							<TableCell className={classes.headTable} align='left'>
+							<TableCell
+								className={clsx(classes.text, classes.headTable)}
+								align='left'>
 								Contact Information
 							</TableCell>
-							<TableCell className={classes.headTable} align='left'>
+							<TableCell
+								className={clsx(classes.text, classes.headTable)}
+								align='left'>
 								Registration Date
 							</TableCell>
-							<TableCell className={classes.headTable} align='left'>
+							<TableCell
+								className={clsx(classes.text, classes.headTable)}
+								align='left'>
 								Country/Post Code
 							</TableCell>
 						</TableRow>
@@ -61,7 +91,7 @@ const UsersTable: React.FC<any> = (props: any) => {
 									<div className={classes.firstCell}>
 										<img className={classes.userImg} src={row.picture.large} />
 										<div className={classes.userFullName}>
-											<Typography className={classes.pText}>
+											<Typography className={classes.cellText}>
 												{row.name.first} {row.name.last}
 											</Typography>
 											<Typography className={classes.tableText}>
@@ -73,7 +103,7 @@ const UsersTable: React.FC<any> = (props: any) => {
 								</TableCell>
 								<TableCell align='left'>
 									<div>
-										<Typography className={classes.pText}>
+										<Typography className={classes.cellText}>
 											{row.email}
 										</Typography>
 										<Typography className={classes.tableText}>
@@ -81,11 +111,11 @@ const UsersTable: React.FC<any> = (props: any) => {
 										</Typography>
 									</div>
 								</TableCell>
-								<TableCell align='left' className={classes.pText}>
+								<TableCell align='left' className={classes.cellText}>
 									{row.registered.date}
 								</TableCell>
 								<TableCell align='left'>
-									<Typography className={classes.pText}>
+									<Typography className={classes.cellText}>
 										{row.location.country}
 									</Typography>
 									<Typography className={classes.tableText}>

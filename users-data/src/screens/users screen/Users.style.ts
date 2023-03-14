@@ -59,16 +59,29 @@ export default makeStyles((appTheme: any) => ({
 	headTable: {
 		color: appTheme.palette.secondary.light,
 		fontSize: '14px !important',
+		letterSpacing: '0.2px',
+		lineHeight: '18px',
+		fontWeight: appTheme.typography.fontWeightMedium,
 	},
 	tableText: {
 		color: appTheme.palette.secondary.main,
 		fontSize: '12px !important',
+		fontWeight: '400',
+		lineHeight: ' 16px',
+		letterSpacing: '0.1px',
 	},
-	pText: { color: appTheme.palette.primary.dark, fontSize: '14px !important' },
+
 	userFullName: {
 		display: 'flex',
 		flexDirection: 'column',
 		paddingLeft: '30px',
 	},
 	firstCell: { display: 'flex', flexDirection: 'row' },
+	cellText: {
+		fontWeight: appTheme.typography.fontWeightLight,
+		fontSize: '14px !important',
+		lineHeight: '20px',
+		letterSpacing: '0.2px',
+		color: appTheme.palette.primary.dark,
+	},
 }));

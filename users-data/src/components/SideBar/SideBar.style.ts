@@ -14,4 +14,13 @@ export default makeStyles((appTheme: any) => ({
 	listOption: {
 		color: appTheme.palette.secondary.dark,
 	},
+	listOptionText: {
+		fontFamily: appTheme.typography.fontFamily,
+		fontStyle: 'normal',
+		fontWeight: '400 !important',
+		fontSize: '16px !important',
+		lineHeight: '20px !important',
+		letterSpacing: '0.2px !important',
+		color: appTheme.palette.secondary.dark,
+	},
 }));

@@ -42,7 +42,7 @@ const SideBarComponent: React.FC<any> = () => {
 				<List>
 					{['Overview', 'Tickets', 'Ideas', 'Users'].map((text, index) => (
 						<ListItem key={text} disablePadding>
-							<ListItemButton className={classes.listOption}>
+							<ListItemButton className={classes.listOptionText}>
 								<ListItemIcon className={classes.listOption}>
 									{index === 0 ? (
 										<PieChartIcon />
