@@ -14,12 +14,14 @@ import Person2Icon from '@mui/icons-material/Person2';
 import logo from '../../assets/logo-white-small 1.png';
 import sideBarStyle from './SideBar.style';
 import { useTheme } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
 
 const drawerWidth = 255;
 
 const SideBarComponent: React.FC<any> = () => {
 	const classes = sideBarStyle();
 	const theme = useTheme();
+	const navigate = useNavigate();
 
 	return (
 		<div>
@@ -42,7 +44,9 @@ const SideBarComponent: React.FC<any> = () => {
 				<List>
 					{['Overview', 'Tickets', 'Ideas', 'Users'].map((text, index) => (
 						<ListItem key={text} disablePadding>
-							<ListItemButton className={classes.listOptionText}>
+							<ListItemButton
+								className={classes.listOptionText}
+								onClick={() => navigate(`/${text.toLocaleLowerCase()}/`)}>
 								<ListItemIcon className={classes.listOption}>
 									{index === 0 ? (
 										<PieChartIcon />
