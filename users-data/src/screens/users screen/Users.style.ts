@@ -84,4 +84,7 @@ export default makeStyles((appTheme: any) => ({
 		letterSpacing: '0.2px',
 		color: appTheme.palette.primary.dark,
 	},
+	startCell: {
+		paddingLeft: '30px !important',
+	},
 }));

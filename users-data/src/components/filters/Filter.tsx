@@ -1,5 +1,6 @@
 import React from 'react';
 import { Autocomplete, TextField } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
 interface SelectProps {
 	value: any;
@@ -13,9 +14,12 @@ interface SelectProps {
 	dfvalue?: any;
 	disableUnderline?: any;
 	placeholder?: string;
+	color?: any;
+	fontSize?: any;
 }
 
 const FilterComponent: React.FC<any> = (props: SelectProps) => {
+	const theme = useTheme();
 	const {
 		value,
 		label,
@@ -27,13 +31,23 @@ const FilterComponent: React.FC<any> = (props: SelectProps) => {
 		disableUnderline = false,
 		placeholder,
 		className,
+		color = theme.palette.secondary.light,
+		fontSize = '14px',
 	} = props;
 
 	return (
 		<div style={{ width: width, height: height }}>
 			<Autocomplete
 				className={className}
-				ListboxProps={{ style: { maxHeight: '10rem' } }}
+				ListboxProps={{
+					style: { maxHeight: '10rem' },
+				}}
+				sx={{
+					'& .MuiInputBase-input ': {
+						height: '18px',
+						color: { color },
+					},
+				}}
 				defaultValue={value}
 				value={value}
 				disablePortal
@@ -49,6 +63,16 @@ const FilterComponent: React.FC<any> = (props: SelectProps) => {
 						InputProps={{
 							...params.InputProps,
 							disableUnderline: disableUnderline,
+						}}
+						sx={{
+							'& .MuiFormLabel-root': {
+								fontStyle: 'normal',
+								fontWeight: '600',
+								fontSize: { fontSize },
+								lineHeight: '20px',
+								letterSpacing: '0.2px',
+								color: { color },
+							},
 						}}
 					/>
 				)}

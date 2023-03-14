@@ -18,7 +18,7 @@ import { createBrowserHistory } from 'history';
 const browserHistory = createBrowserHistory();
 
 const UsersTable: React.FC<any> = (props: any) => {
-	const ur = browserHistory.location.pathname.split('s/');
+	const pathNameUrl = browserHistory.location.pathname.split('s/');
 
 	const classes = UsersStyle();
 	const { rows, rowsPerPage, handleChangePage, handleChangeRowsPerPage, page } =
@@ -40,7 +40,7 @@ const UsersTable: React.FC<any> = (props: any) => {
 
 	useEffect(() => {
 		axios
-			.get(`https://randomuser.me/api?seed=${ur[1]}`)
+			.get(`https://randomuser.me/api?seed=${pathNameUrl[1]}`)
 			.then(({ data }) => {
 				let finalObj = {};
 
@@ -52,7 +52,7 @@ const UsersTable: React.FC<any> = (props: any) => {
 			.catch((err: any) => console.log(err));
 
 		if (browserHistory.location.pathname.length > 7) {
-			handleClickOpen(newData, ur[1]);
+			handleClickOpen(newData, pathNameUrl[1]);
 		}
 	}, [browserHistory, rows]);
 
@@ -64,7 +64,11 @@ const UsersTable: React.FC<any> = (props: any) => {
 						<TableRow>
 							<TableCell
 								align='left'
-								className={clsx(classes.text, classes.headTable)}>
+								className={clsx(
+									classes.text,
+									classes.headTable,
+									classes.startCell
+								)}>
 								User
 							</TableCell>
 							<TableCell
@@ -118,7 +122,10 @@ const UsersTable: React.FC<any> = (props: any) => {
 									key={index}
 									sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
 									onClick={() => handleClickOpen(row, row.id.value)}>
-									<TableCell component='th' scope='row'>
+									<TableCell
+										component='th'
+										scope='row'
+										className={classes.startCell}>
 										<div className={classes.firstCell}>
 											<img
 												className={classes.userImg}
