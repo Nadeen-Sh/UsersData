@@ -113,11 +113,9 @@ const UsersTable: React.FC<any> = (props: any) => {
 							return (
 								<TableRow
 									key={index}
-									sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-									<TableCell
-										component='th'
-										scope='row'
-										onClick={() => handleClickOpen(row, row.id.name)}>
+									sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+									onClick={() => handleClickOpen(row, row.id.name)}>
+									<TableCell component='th' scope='row'>
 										<div className={classes.firstCell}>
 											<img
 												className={classes.userImg}
