@@ -42,7 +42,11 @@ export default makeStyles((appTheme: any) => ({
 		flexDirection: 'row',
 		marginRight: '15px',
 	},
-	tablePaper: { marginTop: '22px !important', marginRight: '15px' },
+	tablePaper: {
+		marginTop: '22px !important',
+		marginRight: '15px',
+		marginBottom: '8px',
+	},
 	page: {
 		marginLeft: '280px',
 		backgroundColor: appTheme.palette.primary.light,
