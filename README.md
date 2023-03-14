@@ -1,6 +1,8 @@
 
-## Users Data
-In the user Data task, a table with users' data is displayed, with popups for each user opening.
+# Users Data
+
+### About:
+In the user Data task, a table with users' data (name, email,address,..etc) is displayed, with popups for each user opening.
 
 ## Development:
 
@@ -15,6 +17,24 @@ In the user Data task, a table with users' data is displayed, with popups for ea
   * Backend Api
       - used randomuser api for users data.
 
+
+## File Structur
+ 
+    ├── ...
+    ├── src                 
+    │   ├── components
+    |   |   ├── SideBar       
+    │   |   └── Filters
+    │   ├── Screens 
+    |   |   ├── Users   
+    |   |   ├── UserDetails  
+    │   |   └── NotFound
+    |   | 
+    |   ├── Theme
+    │   └── App               
+    └── ...
+    
+ 
 
 
  ### Run the website locally:
