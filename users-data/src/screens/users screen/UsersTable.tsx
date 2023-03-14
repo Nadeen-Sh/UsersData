@@ -24,6 +24,7 @@ const UsersTable: React.FC<any> = (props: any) => {
 		props;
 	const [open, setOpen] = useState(false);
 	const [newData, setNewData] = useState<any>([]);
+
 	const navigate = useNavigate();
 
 	const handleClickOpen = (data: any, id: any) => {
@@ -80,50 +81,87 @@ const UsersTable: React.FC<any> = (props: any) => {
 						</TableRow>
 					</TableHead>
 					<TableBody>
-						{rows.map((row: any, index: number) => (
-							<TableRow
-								key={index}
-								sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-								<TableCell
-									component='th'
-									scope='row'
-									onClick={() => handleClickOpen(row, row.id.name)}>
-									<div className={classes.firstCell}>
-										<img className={classes.userImg} src={row.picture.large} />
-										<div className={classes.userFullName}>
+						{rows.map((row: any, index: number) => {
+							var hours = parseInt(row.registered.date.substring(0, 2), 10),
+								minutes = row.registered.date.substring(2, 4),
+								ampm = 'AM';
+
+							if (hours == 12) {
+								ampm = 'PM';
+							} else if (hours == 0) {
+								hours = 12;
+							} else if (hours > 12) {
+								hours -= 12;
+								ampm = 'PM';
+							}
+
+							var date = new Date(row.registered.date);
+							var year = date.getFullYear();
+							var month: any = date.toLocaleString('default', {
+								month: 'long',
+							});
+							var dt: any = date.getDate();
+
+							if (dt < 10) {
+								dt = '0' + dt;
+							}
+							if (month < 10) {
+								month = '0' + month;
+							}
+
+							return (
+								<TableRow
+									key={index}
+									sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+									<TableCell
+										component='th'
+										scope='row'
+										onClick={() => handleClickOpen(row, row.id.name)}>
+										<div className={classes.firstCell}>
+											<img
+												className={classes.userImg}
+												src={row.picture.large}
+											/>
+											<div className={classes.userFullName}>
+												<Typography className={classes.cellText}>
+													{row.name.first} {row.name.last}
+												</Typography>
+												<Typography className={classes.tableText}>
+													{row.location.street.number}{' '}
+													{row.location.street.name}, {row.location.city}
+												</Typography>
+											</div>
+										</div>
+									</TableCell>
+									<TableCell align='left'>
+										<div>
 											<Typography className={classes.cellText}>
-												{row.name.first} {row.name.last}
+												{row.email}
 											</Typography>
 											<Typography className={classes.tableText}>
-												{row.location.street.number} {row.location.street.name},{' '}
-												{row.location.city}
+												{row.cell}
 											</Typography>
 										</div>
-									</div>
-								</TableCell>
-								<TableCell align='left'>
-									<div>
+									</TableCell>
+									<TableCell align='left' className={classes.cellText}>
 										<Typography className={classes.cellText}>
-											{row.email}
+											{month + ' ' + dt + ', ' + year}
 										</Typography>
 										<Typography className={classes.tableText}>
-											{row.cell}
+											{hours + ':' + minutes + ' ' + ampm}
 										</Typography>
-									</div>
-								</TableCell>
-								<TableCell align='left' className={classes.cellText}>
-									{row.registered.date}
-								</TableCell>
-								<TableCell align='left'>
-									<Typography className={classes.cellText}>
-										{row.location.country}
-									</Typography>
-									<Typography className={classes.tableText}>
-										{row.location.postcode}
-									</Typography>
-								</TableCell>
-							</TableRow>
-						))}
+									</TableCell>
+									<TableCell align='left'>
+										<Typography className={classes.cellText}>
+											{row.location.country}
+										</Typography>
+										<Typography className={classes.tableText}>
+											{row.location.postcode}
+										</Typography>
+									</TableCell>
+								</TableRow>
+							);
+						})}
 					</TableBody>
 				</Table>
 			</TableContainer>
