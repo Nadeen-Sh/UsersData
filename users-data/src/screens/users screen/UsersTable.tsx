@@ -13,6 +13,7 @@ import {
 import UsersStyle from './Users.style';
 import UserDetails from '../user details screen/UserDetails';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { createBrowserHistory } from 'history';
 const browserHistory = createBrowserHistory();
 
@@ -38,15 +39,17 @@ const UsersTable: React.FC<any> = (props: any) => {
 	};
 
 	useEffect(() => {
-		const filteredData = rows.filter((row: any) => {
-			return row.id.name == ur[1];
-		});
-		let finalObj = {};
+		axios
+			.get(`https://randomuser.me/api?seed=${ur[1]}`)
+			.then(({ data }) => {
+				let finalObj = {};
 
-		for (let i = 0; i < filteredData.length; i++) {
-			Object.assign(finalObj, filteredData[i]);
-		}
-		setNewData(finalObj);
+				for (let i = 0; i < data.results.length; i++) {
+					Object.assign(finalObj, data.results[i]);
+				}
+				setNewData(finalObj);
+			})
+			.catch((err: any) => console.log(err));
 
 		if (browserHistory.location.pathname.length > 7) {
 			handleClickOpen(newData, ur[1]);
@@ -114,7 +117,7 @@ const UsersTable: React.FC<any> = (props: any) => {
 								<TableRow
 									key={index}
 									sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-									onClick={() => handleClickOpen(row, row.id.name)}>
+									onClick={() => handleClickOpen(row, row.id.value)}>
 									<TableCell component='th' scope='row'>
 										<div className={classes.firstCell}>
 											<img

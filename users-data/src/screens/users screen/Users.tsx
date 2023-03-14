@@ -41,7 +41,6 @@ const UsersComponent: React.FC<any> = () => {
 				.get(`https://randomuser.me/api/?gender=${gender}`)
 				.then(({ data }) => {
 					setRows(data.results);
-					console.log(data);
 				})
 				.catch((err: any) => console.log(err));
 		} else if (nationality) {

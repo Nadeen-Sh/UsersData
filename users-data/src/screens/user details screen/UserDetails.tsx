@@ -45,7 +45,9 @@ const UserDetails: React.FC<any> = (props) => {
 						</div>
 					</>
 				) : (
-					<Typography>user not on this list</Typography>
+					<Typography className={classes.text}>
+						Wait until find the user
+					</Typography>
 				)}
 			</Dialog>
 		</div>
