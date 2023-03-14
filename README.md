@@ -19,7 +19,7 @@ In the user Data task, a table with users' data is displayed, with popups for ea
 
 
  ### Run the website locally:
- - Clone the project repo, and cd to its directory `UserData`.
- - Cd the project directory `cd userData`.
+ - Clone the project repo, and cd to its directory `UsersData`.
+ - Cd the project directory `cd users-data`.
  - Run `npm i` to install npm depends.
  - Run `npm start` to start the website.
