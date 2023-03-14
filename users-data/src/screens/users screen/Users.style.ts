@@ -87,4 +87,7 @@ export default makeStyles((appTheme: any) => ({
 	startCell: {
 		paddingLeft: '30px !important',
 	},
+	footerTable: {
+		color: appTheme.palette.secondary.light,
+	},
 }));

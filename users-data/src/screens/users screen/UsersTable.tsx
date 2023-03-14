@@ -171,11 +171,13 @@ const UsersTable: React.FC<any> = (props: any) => {
 								</TableRow>
 							);
 						})}
+						<TableRow></TableRow>
 					</TableBody>
 				</Table>
 			</TableContainer>
 			<TablePagination
-				rowsPerPageOptions={[8, 16]}
+				className={classes.footerTable}
+				rowsPerPageOptions={[8, 8]}
 				component='div'
 				count={16}
 				rowsPerPage={rowsPerPage}
