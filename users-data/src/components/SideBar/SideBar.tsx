@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
 	Drawer,
 	List,
@@ -22,6 +22,7 @@ const SideBarComponent: React.FC<any> = () => {
 	const classes = sideBarStyle();
 	const theme = useTheme();
 	const navigate = useNavigate();
+	const [clicked, setClicked] = useState<any>(-1);
 
 	return (
 		<div>
@@ -43,10 +44,18 @@ const SideBarComponent: React.FC<any> = () => {
 				</div>
 				<List>
 					{['Overview', 'Tickets', 'Ideas', 'Users'].map((text, index) => (
-						<ListItem key={text} disablePadding>
+						<ListItem
+							key={text}
+							disablePadding
+							className={
+								clicked === index ? classes.clickedRow : classes.option
+							}>
 							<ListItemButton
 								className={classes.listOptionText}
-								onClick={() => navigate(`/${text.toLocaleLowerCase()}/`)}>
+								onClick={() => {
+									navigate(`/${text.toLocaleLowerCase()}/`);
+									setClicked(index);
+								}}>
 								<ListItemIcon className={classes.listOption}>
 									{index === 0 ? (
 										<PieChartIcon />

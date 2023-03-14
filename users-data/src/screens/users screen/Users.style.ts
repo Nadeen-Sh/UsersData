@@ -90,4 +90,11 @@ export default makeStyles((appTheme: any) => ({
 	footerTable: {
 		color: appTheme.palette.secondary.light,
 	},
+	userRow: {
+		backgroundColor: 'white',
+		'&:hover': {
+			backgroundColor: '#e5e5ff',
+		},
+	},
+	clickedRow: { backgroundColor: '#e5e5ff' },
 }));

@@ -23,4 +23,13 @@ export default makeStyles((appTheme: any) => ({
 		letterSpacing: '0.2px !important',
 		color: appTheme.palette.secondary.dark,
 	},
+	option: {
+		'&:hover': {
+			backgroundColor: '#252733',
+		},
+	},
+	clickedRow: {
+		backgroundColor: '#252733',
+		borderLeft: '3px solid grey',
+	},
 }));

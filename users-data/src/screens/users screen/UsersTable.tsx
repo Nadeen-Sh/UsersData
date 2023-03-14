@@ -25,6 +25,7 @@ const UsersTable: React.FC<any> = (props: any) => {
 		props;
 	const [open, setOpen] = useState(false);
 	const [newData, setNewData] = useState<any>([]);
+	const [clicked, setClicked] = useState<any>(-1);
 
 	const navigate = useNavigate();
 
@@ -35,6 +36,7 @@ const UsersTable: React.FC<any> = (props: any) => {
 
 	const handleClose = () => {
 		setOpen(false);
+		setClicked(-1);
 		navigate(`/users/`);
 	};
 
@@ -116,12 +118,19 @@ const UsersTable: React.FC<any> = (props: any) => {
 							if (month < 10) {
 								month = '0' + month;
 							}
+							console.log(clicked, 'u');
 
 							return (
 								<TableRow
+									className={
+										clicked === index ? classes.clickedRow : classes.userRow
+									}
 									key={index}
 									sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-									onClick={() => handleClickOpen(row, row.id.value)}>
+									onClick={() => {
+										handleClickOpen(row, row.id.value);
+										setClicked(index);
+									}}>
 									<TableCell
 										component='th'
 										scope='row'
